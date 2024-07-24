@@ -1,21 +1,16 @@
+
 import React from 'react'
 import { 
   Card, CardActions, CardContent, CardMedia, Button, Typography, Grid 
 } from '@mui/material'
+import { getDataList } from '../contextApi/CallApi';
 
-export async function getData() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attractions`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
-  }
-  return res.json()
-}
 
 export default async function page() {
   if (!process.env.NEXT_PUBLIC_API_URL) { // ถ้าไม่มีเจอ url api ตอนดีพลอยไป มันจะ error เพื่อจะเอา path api มา อัพเดทในไฟล์ .env อีกที
     return null
   }
-  const data = await getData();
+  const data = await getDataList();
   return (
     <div>
       <Typography variant='h5'>Attractions</Typography>

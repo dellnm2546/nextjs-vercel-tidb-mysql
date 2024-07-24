@@ -1,22 +1,21 @@
+
 import React from 'react'
 import { 
-  Container, Card, CardActions, CardContent, CardMedia, Button, Typography
+  Container, Card, CardContent, CardMedia, Typography
 } from '@mui/material';
-
-export async function getData(id: any) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/attractions/${id}/`)
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+import { getDataById } from '@/app/contextApi/CallApi';
+interface Params {
+    id: string;
   }
-  return res.json()
-}
 
-export default async function page({ params }: any) {
+export default async function page({ params }: { params: Params }) {
+
   if (!process.env.NEXT_PUBLIC_API_URL) {
     return null
   }
+
   const id = params.id
-  const data = await getData(id)
+  const data = await getDataById(id)
   console.log(data.length)
   return (
     <Container maxWidth="md" sx={{ mt: 2 }}>
