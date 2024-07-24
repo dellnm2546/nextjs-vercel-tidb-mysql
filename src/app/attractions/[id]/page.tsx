@@ -4,19 +4,15 @@ import {
   Container, Card, CardContent, CardMedia, Typography
 } from '@mui/material';
 import { getDataById } from '@/app/contextApi/CallApi';
-interface Params {
-    id: string;
-  }
 
-export default async function page({ params }: { params: Params }) {
-
+export default async function page({ params }: any) {
   if (!process.env.NEXT_PUBLIC_API_URL) {
     return null
   }
 
   const id = params.id
   const data = await getDataById(id)
-  console.log(data.length)
+ 
   return (
     <Container maxWidth="md" sx={{ mt: 2 }}>
       { data.length > 0 &&
